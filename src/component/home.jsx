@@ -5,7 +5,7 @@ function Home() {
 
     return (
         <div style={{ padding: 20 }} onClick={foo}>
-            <h2>home</h2>
+            <h2>home2</h2>
             <p>为啥就是很快</p>
         </div>
     );
