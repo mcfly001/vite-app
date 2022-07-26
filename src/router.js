@@ -16,11 +16,11 @@ export default ({ history }) => {
     return (
         <>
             这里修改会更新
-            <Button type="primary" onClick={goAbout} style={{ marginTop: 20, marginBottom: 20 }}>
-                这个是啥东西
-            </Button>
             <Button type="ghost" onClick={goHome} style={{ marginTop: 20, marginBottom: 20 }}>
-                不知道啥原因特别快fdasfas
+                home
+            </Button>
+            <Button type="primary" onClick={goAbout} style={{ marginTop: 20, marginBottom: 20 }}>
+                about
             </Button>
             <Router history={history}>
                 <Switch>

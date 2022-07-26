@@ -1,6 +1,7 @@
 import path from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import inject from '@rollup/plugin-inject'
 import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import vitePluginImp from 'vite-plugin-imp';
 import antdViteImportPlugin from 'antd-vite-import-plugin';
@@ -11,6 +12,9 @@ export default defineConfig({
     plugins: [
         legacy({
             targets: ['defaults', 'not IE 11']
+        }),
+        inject({
+            React: 'react'
         }),
         viteCommonjs(),
         antdViteImportPlugin(),
@@ -27,7 +31,8 @@ export default defineConfig({
                             style: 'css'
                         }
                     ]
-                ]
+                ],
+                //parserOpts: ['optionalChaining', 'optionalChaining', 'logicalAssignment']
             }
         }),
         vitePluginImp({
@@ -37,24 +42,35 @@ export default defineConfig({
                     libName: 'antd',
                     libDirectory: 'es',
                     style: (name) => `antd/es/${name}/style`
-                }
+                },
+                // {
+                //     libName: 'tntd',
+                //     libDirectory: 'es',
+                //     style: (name) => `tntd/es/${name}/index.less`
+                // }
             ]
         })
     ],
+    // esbuild: {
+    //     jsxInject: `import React from 'react'`,
+    // },
     resolve: {
         alias: [
             { find: '@', replacement: path.resolve('./', 'src') },
-            { find: /^~@tntd/, replacement: path.resolve('./', 'node_modules/@tntd/') }
+            { find: /^~@tntd/, replacement: path.resolve('./', 'node_modules/@tntd/') },
+            { find: 'react-draggable', replacement: path.resolve('./', 'node_modules/react-draggable/build/web/react-draggable.min.js') },
+            { find: 'react-resizable', replacement: path.resolve('./', 'node_modules/react-resizable/dist/bundle.js') },
+            // { find: 'history', replacement: path.resolve('./', 'node_modules/history/esm/history.js') }
         ]
     },
-    // define: {
-    //     global: {},
-    //     NODE_ENV: JSON.stringify('development'),
-    //     'process.env': {
-    //         SYS_ENV: 'development',
-    //         NODE_ENV: 'development'
-    //     }
-    // },
+    define: {
+        global: {},
+        NODE_ENV: JSON.stringify('development'),
+        'process.env': {
+            SYS_ENV: 'development',
+            NODE_ENV: 'development'
+        },
+    },
     optimizeDeps: {
         entries: [],
         esbuildOptions: {
@@ -62,7 +78,7 @@ export default defineConfig({
                 // Solves:
                 // https://github.com/vitejs/vite/issues/5308
                 // add the name of your package
-                esbuildCommonjs(['history'])
+                esbuildCommonjs(['history', 'react-draggable'])
             ]
         }
     },
@@ -74,6 +90,7 @@ export default defineConfig({
         }
     },
     // esbuild: {
+    //     jsxInject: `import React from 'react'`,
     //     jsxFactory: 'h',
     //     jsxFragment: 'Fragment'
     // }
