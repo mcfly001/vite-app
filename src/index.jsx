@@ -18,5 +18,7 @@ const app = dva({
     }
 });
 
+console.log(app)
+
 app.router(router);
 app.start('#root');

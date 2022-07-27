@@ -1,4 +1,4 @@
-import { Ellipsis} from 'tntd'
+import { Ellipsis } from 'tntd'
 
 import './home.less'
 
@@ -9,7 +9,7 @@ function Home() {
 
     return (
         <div className="foo" style={{ padding: 20 }} onClick={foo}>
-            <h2>home222</h2>
+            <h2>home3335555</h2>
             <p>为啥就是很快，dfafds</p>
             <Ellipsis widthLimit={50} title="测试发到沙发上的方法是否打算发测试发到沙发上的方法是否打算发" />
         </div>
